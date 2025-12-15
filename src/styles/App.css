@@ -1,0 +1,74 @@
+/* ============================================================
+    ROOT APPLICATION LAYOUT
+  ------------------------------------------------------------
+    The entire "OS" sits inside .app. This component controls:
+      - fullscreen sizing
+      - overflow blocking (since the OS never scrolls)
+      - base font family (monospace for retro terminal vibe)
+   ============================================================ */
+.app {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    font-family: monospace;
+}
+
+/* ============================================================
+    DOCUMENT RESET + GLOBAL RULES
+  ------------------------------------------------------------
+    Keep the real <body> from scrolling, bouncing, or shifting on
+    mobile. No fixed positioning here — that breaks Safari.
+   ============================================================ */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  position: fixed;
+}
+
+/* ============================================================
+    DESKTOP BACKGROUND
+  ------------------------------------------------------------
+    Served from /public/background/.
+    Vite supports direct absolute paths to /public.
+   ============================================================ */
+.background-wrap {
+    position: fixed;
+    inset: 0;
+    background-image: url("/background/bg_desktop.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    /* purely visual */
+    z-index: -1;
+    /* behind all UI layers */
+}
+
+/* ============================================================
+    RESPONSIVE BACKGROUNDS
+  ------------------------------------------------------------
+    Swap out background images based on device width/orientation.
+    No JS needed — pure CSS keeps this lightweight and reliable.
+   ============================================================ */
+
+/* iPhone & small devices */
+@media screen and (max-width: 430px) {
+    .background-wrap {
+        background-image: url("/background/bg_iphone.webp");
+        background-position: bottom center;
+    }
+}
+
+/* iPad 12" Pro portrait */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .background-wrap {
+        background-image: url("/background/bg_ipad.webp");
+        background-position: bottom center;
+    }
+}

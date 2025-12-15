@@ -1,0 +1,60 @@
+/* ============================================
+    Folder (icon + label)
+    Used in the Projects and Prototypes grids inside FileExplorer
+   ============================================ */
+
+.folder-tile {
+    width: 110px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+
+    /* Buttons should act like buttons */
+    cursor: pointer;
+    padding: 0.5rem 0.25rem;
+    border: none;
+    background: transparent;
+    color: inherit;
+
+    border-radius: 6px;
+
+    /* Small but snappy hover animation */
+    transition:
+        transform 0.12s ease,
+        background 0.12s ease,
+        box-shadow 0.12s ease;
+}
+
+.folder-tile:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.folder-locked {
+    opacity: 0.7;
+    filter: saturate(0.85);
+}
+
+.folder-locked:hover {
+    opacity: 0.9;
+    filter: saturate(1);
+}
+
+/* Folder emoji or icon */
+.folder-icon {
+    font-size: 48px;
+    line-height: 1;
+}
+
+/* Folder label */
+.folder-label {
+    font-size: 0.9rem;
+    color: #9eeaff;
+    text-align: center;
+
+    /* Allow long names to wrap instead of blowing layout */
+    word-break: break-word;
+}

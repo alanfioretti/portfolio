@@ -1,0 +1,83 @@
+/* ============================================================
+    CONTACT MAIL APP
+    Self-contained styles for the fake email composer window.
+   ============================================================ */
+
+.mail-app {
+    padding: 1rem;
+    color: #e6f7ff;
+}
+
+/* Title bar */
+.mail-app-title {
+    background: #333;
+    border: 1px solid #4d4d4d;
+    padding: 0.4rem 0.6rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+/* Honeypot (anti-bot) — permanently hidden */
+.mail-form .hp {
+    position: absolute;
+    left: -9999px;
+    height: 0;
+    width: 0;
+    opacity: 0;
+}
+
+/* Row layout: label + input */
+.mail-form .row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+/* Labels */
+.mail-form label {
+    color: #c8d7de;
+}
+
+/* Inputs + textarea shared styles */
+.mail-form input,
+.mail-form textarea {
+    background: #1f1f1f;
+    border: 1px solid #4a4a4a;
+    color: #eafaff;
+    border-radius: 6px;
+    padding: 0.5rem 0rem;
+    width: 100%;
+}
+
+/* Submit area */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.actions button {
+    background: #2b3b45;
+    color: #dff7ff;
+    border: 1px solid #4d6a76;
+    padding: 0.45rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Status messages (sent/error) */
+.actions .status {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.status.sent {
+    color: #9cffb0;
+}
+
+.status.error {
+    color: #ff9ca3;
+}

@@ -1,0 +1,50 @@
+/* ============================================================
+    PARTICLE FIELD
+    Used for the dialogue → explorer transition effect.
+    Renders ephemeral glowing particles drifting upward.
+   ============================================================ */
+
+.particle-field {
+    position: fixed;
+    inset: 0;
+    /* full viewport */
+    pointer-events: none;
+    /* purely visual */
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* ------------------------------------------------------------
+    Individual particle
+    JS assigns size, position, duration, color, and delay.
+   ------------------------------------------------------------ */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleFloat ease-in-out forwards;
+}
+
+/* ------------------------------------------------------------
+    Float animation
+    Particles fade in, rise, shrink slightly, then vanish.
+   ------------------------------------------------------------ */
+@keyframes particleFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(1);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(0.6);
+    }
+}

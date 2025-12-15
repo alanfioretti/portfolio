@@ -1,0 +1,68 @@
+/* ===============================
+    Dialogue Box Wrapper
+   =============================== */
+
+.dialogue-box {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    max-width: 400px;
+
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+
+    border-radius: 12px;
+    cursor: pointer;
+    z-index: 2;
+
+    /* Smooth fade-in just feels nicer */
+    animation: dialogue-pop 0.25s ease-out;
+}
+
+/* Speaker variants (can add more later) */
+.dialogue-box.grackle {
+    left: 60%;
+    /* shifts the grackle's bubble to the right */
+}
+
+/* Optional: rook variant for clarity */
+.dialogue-box.rook {
+    left: 10%;
+}
+
+/* ===============================
+    Click hint ( “[…]” )
+   =============================== */
+
+.click-hint {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    text-align: right;
+    color: #aaa;
+
+    animation: blink 1s step-start infinite;
+}
+
+/* ===============================
+    Animations
+   =============================== */
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes dialogue-pop {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

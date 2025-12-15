@@ -1,0 +1,384 @@
+/* ============================================================
+    CORRUPTED PROTOTYPE VIEW
+    Retro terminal vibes, controlled chaos, fake file corruption
+   ============================================================ */
+
+.corrupted-prototype {
+  width: 90%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  color: #ff4aff;
+
+  /* Soft fade-in for the whole window */
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* -------------------------
+    GLITCH + REVEAL PHASES
+   ------------------------- */
+
+.cp-glitch-text {
+  font-family: monospace;
+  animation: glitch 0.15s infinite;
+}
+
+.cp-title-text,
+.cp-lore-text {
+  font-family: monospace;
+  margin-bottom: 1.25rem;
+}
+
+/* Flickery glitch animation */
+@keyframes glitch {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; transform: translateX(-2px); }
+  100% { opacity: 1; }
+}
+
+/* -------------------------
+    LINKS SECTION 
+   ------------------------- */
+
+.cp-links {
+  padding-top: 0.5rem;
+}
+
+.cp-links-title {
+  font-family: monospace;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.85;
+}
+
+.corrupted-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.corrupted-links li {
+  margin: 0.3rem 0;
+}
+
+/* “Buttons” but styled like cursed terminal text */
+.cursed-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  font-family: "Courier New", monospace;
+  color: #eb353f;
+  opacity: 0.85;
+  text-align: left;
+
+  transition: color 0.2s, opacity 0.2s, text-shadow 0.2s;
+}
+
+.cursed-link-btn:hover {
+  color: #ff00aa;
+  opacity: 1;
+  text-shadow: 0 0 8px #ff00aa;
+}
+
+/* Jitter animation (triggered via JS) */
+.cp-jitter {
+  animation: cp-jitter 0.25s steps(2);
+}
+
+@keyframes cp-jitter {
+  0% { transform: translate(1px, 0px); }
+  50% { transform: translate(-1px, 0px); }
+  100% { transform: translate(1px, 0px); }
+}
+
+/* -------------------------
+    REPAIR MODE (WIN95 THEME)
+   ------------------------- */
+
+.cp-repairing {
+  padding: 1.5rem;
+  font-family: "MS Sans Serif", sans-serif;
+  color: #e6e6e6;
+}
+
+.cp-repair-title {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Outer Win95 frame */
+.cp-progress-bar {
+  width: 50%;
+  height: 22px;
+  border: 2px solid #3a0a0a;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    inset 1px 1px 0 #000,
+    inset -1px -1px 0 #1b1b1b;
+}
+
+/* Animated fill */
+.cp-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    #ff33cc,
+    #ff33cc 8px,
+    #d900b8 8px,
+    #d900b8 16px
+  );
+  animation: cp-loading 1.8s forwards linear;
+  filter: contrast(1.4) brightness(1.1);
+}
+
+.cp-corrupted-view {
+    padding: 1rem;
+    font-family: "Courier New", monospace;
+    color: #ff4aff;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.cp-corrupted-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 8px #ff33cc;
+}
+
+.cp-corrupted-subtext {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-bottom: 0.75rem;
+}
+
+.cp-log-snippet {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid #ff4aff55;
+    padding: 0.75rem;
+    white-space: pre-wrap;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.cp-back-btn {
+    background: #200020;
+    color: #ff4aff;
+    border: 1px solid #842084;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.cp-back-btn:hover {
+    background: #300030;
+}
+
+/* Win95 load animation */
+@keyframes cp-loading {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.cp-repair-subtext {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* -------------------------
+    Fade-in (shared utility)
+   ------------------------- */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================
+    GLOBAL — shared across all cursed modules
+   ========================================== */
+
+.cp-input {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid #ff4aff88;
+  color: #ffbaff;
+  font-family: monospace;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+.cp-input:focus {
+  border-color: #ff4aff;
+  background: rgba(0,0,0,0.55);
+}
+
+.cp-action-btn {
+  background: #2a002a;
+  color: #ffbaff;
+  border: 1px solid #ff4affaa;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-family: monospace;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.cp-action-btn:hover {
+  background: #3d003d;
+  transform: translateY(-2px);
+}
+
+.cp-output-block {
+  border: 1px solid #ff4aff55;
+  background: rgba(0,0,0,0.4);
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  border-radius: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.cp-output-block pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #ffbaff;
+}
+
+.cp-hint {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-align: center;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  font-family: monospace;
+  color: #ff95ff;
+}
+
+.cp-back-btn {
+  background: none;
+  color: #ff3dec;
+  border: none;
+  font-family: monospace;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.cp-back-btn:hover {
+  opacity: 1;
+  text-shadow: 0 0 8px #ff00aa;
+}
+
+
+/* ==========================================
+    MINI GRAPH VISUALIZER
+   ========================================== */
+
+.cp-graph-canvas {
+  display: block;
+  margin: 1rem auto;
+  border: 1px solid #ff4aff44;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+/* ==========================================
+    SIGNAL_PARSER_Δ07 — text transformer
+   ========================================== */
+
+.cp-output-block {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid #ff4aff33;
+}
+
+.cp-output-block pre {
+  color: #ffbaff;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+/* ==========================================
+    SKRAA_SHELL.v1rc — cursed CLI shell
+   ========================================== */
+
+.cp-terminal {
+  background: rgba(0,0,0,0.5);
+  border: 1px solid #ff4aff55;
+  padding: 0.8rem;
+  height: 200px;
+  overflow-y: auto;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  font-family: monospace;
+  color: #ff9bfd;
+  scrollbar-width: thin;
+}
+
+.cp-terminal pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.cp-terminal-input {
+  width: 100%;
+  padding: 0.6rem;
+  font-family: monospace;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid #ff4aff88;
+  color: #ffbaff;
+  border-radius: 6px;
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+.cp-terminal-input:focus {
+  border-color: #ff4aff;
+}
+
+/* ==========================================
+    converter_v2.log — summary log view
+   ========================================== */
+
+.cp-log-snippet {
+  background: rgba(0,0,0,0.45);
+  border: 1px solid #ff4aff55;
+  padding: 1rem;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #ffbaff;
+  margin-bottom: 1rem;
+}
+
+.cp-ext-link {
+  display: inline-block;
+  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  color: #ff4aff;
+  opacity: 0.9;
+}
+
+.cp-ext-link:hover {
+  opacity: 1;
+  text-shadow: 0 0 6px #ff00aa;
+}
