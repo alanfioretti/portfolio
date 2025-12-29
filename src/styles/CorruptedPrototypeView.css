@@ -10,8 +10,7 @@
   display: flex;
   flex-direction: column;
   color: #ff4aff;
-
-  /* Soft fade-in for the whole window */
+  
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -204,7 +203,7 @@
 }
 
 /* ==========================================
-    GLOBAL — shared across all cursed modules
+    GLOBAL - shared across all cursed modules
    ========================================== */
 
 .cp-input {
@@ -301,7 +300,7 @@
 
 
 /* ==========================================
-    SIGNAL_PARSER_Δ07 — text transformer
+    SIGNAL_PARSER_Δ07 - text transformer
    ========================================== */
 
 .cp-output-block {
@@ -316,7 +315,7 @@
 }
 
 /* ==========================================
-    SKRAA_SHELL.v1rc — cursed CLI shell
+    SKRAA_SHELL.v1rc - cursed CLI shell
    ========================================== */
 
 .cp-terminal {
@@ -354,7 +353,7 @@
 }
 
 /* ==========================================
-    converter_v2.log — summary log view
+    converter_v2.log - summary log view
    ========================================== */
 
 .cp-log-snippet {

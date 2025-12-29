@@ -17,7 +17,7 @@ export default function ConverterLog({ onBack }) {
             <div className="cp-prototype-title">scry_docs//converter_v2.log</div>
 
             <div className="cp-prototype-subtext">
-                Obsidian Markdown Migration Engine — v2
+                Obsidian Markdown Migration Engine - v2
                 <br />
                 STATUS: <span className="ok">Operational</span>
             </div>

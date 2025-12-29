@@ -1,6 +1,6 @@
 /* ============================================================
     CONTACT MAIL APP
-    Self-contained styles for the fake email composer window.
+    Self-contained styles for the internal email composer window.
    ============================================================ */
 
 .mail-app {
@@ -17,7 +17,7 @@
     font-weight: 700;
 }
 
-/* Honeypot (anti-bot) — permanently hidden */
+/* Honeypot (anti-bot) - permanently hidden */
 .mail-form .hp {
     position: absolute;
     left: -9999px;
@@ -33,6 +33,17 @@
     gap: 0.6rem;
     align-items: center;
     margin-bottom: 0.6rem;
+}
+
+.row.required label::after {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin-left: 6px;
+    border-radius: 50%;
+    background: rgba(120, 200, 200, 0.7);
+    vertical-align: middle;
 }
 
 /* Labels */

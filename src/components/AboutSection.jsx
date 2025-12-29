@@ -3,7 +3,7 @@ import "../styles/FileExplorer.css";
 
 /*
     Static "About Me" section displayed inside the File Explorer.
-    Pure presentational component — no external props required.
+    Pure presentational component - no external props required.
 */
 
 const Tag = ({ children }) => <span className="tag">{children}</span>;
@@ -37,7 +37,7 @@ export default function AboutSection() {
                     <h3>Recent builds</h3>
                     <ul className="about-list">
                         <li>
-                            <strong>The Roost:</strong> an interactive portfolio disguised as a tiny OS,
+                            <strong>Portfolio:</strong> an interactive portfolio disguised as a tiny OS,
                             complete with a dialogue system, glitch effects, and a retro file-explorer interface.
                         </li>
                         <li>

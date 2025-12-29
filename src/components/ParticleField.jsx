@@ -12,9 +12,9 @@ const random = (min, max) => Math.random() * (max - min) + min;
             DialogueBox → FileExplorer
 
         Behavior:
-            - When `active`, the component spawns short-lived glowing particles.
+            - When 'active', the component spawns short-lived glowing particles.
             - Particles animate outward / fade (handled via CSS).
-            - After a fixed delay, notifies parent via `onFieldComplete`.
+            - After a fixed delay, notifies parent via 'onFieldComplete'.
 
         Notes:
             - The particle list is capped at 80 for performance.
@@ -54,7 +54,6 @@ export default function ParticleField({
         }, 150);
 
         // Wait before signaling “field complete”
-        // 500ms is very short — if intentional, leave it.
         const done = setTimeout(() => {
             if (typeof onFieldComplete === "function") {
                 onFieldComplete();

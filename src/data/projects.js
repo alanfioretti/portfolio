@@ -1,8 +1,9 @@
 // src/data/projects.js
-import { PROTOTYPES } from "./prototypes";
+import {
+    PROTOTYPES
+} from "./prototypes";
 
-export const PROJECTS = [
-    {
+export const PROJECTS = [{
         slug: "lunarose",
         name: "LunaRose Tarot",
         icon: "📂",
@@ -16,6 +17,7 @@ export const PROJECTS = [
         },
         blurb: "A clean, mobile-friendly site for a tarot reader with live testimonials (Neon DB + Vercel) and a simple content flow.",
         stack: ["HTML", "CSS", "JavaScript", "Vercel", "Neon"],
+        isLocked: false,
         isCorrupted: false,
         isFolder: false,
     },
@@ -30,10 +32,10 @@ export const PROJECTS = [
         note: "RookOS is under active construction. Public deployment has been intentionally paused while core systems are refactored and hardened. Limited artifacts remain accessible.",
         previews: [{
             id: "redacted",
-            label: "[ SYSTEM SNAPSHOT — REDACTED ]",
+            label: "[ SYSTEM SNAPSHOT - REDACTED ]",
             redacted: true
         }],
-        status: "locked",
+        isLocked: true,
         isCorrupted: false,
         isFolder: false,
     },
@@ -50,8 +52,9 @@ export const PROJECTS = [
             live: "https://afioretti.dev",
             repo: "https://github.com/alanfioretti/portfolio",
         },
-        blurb: "An interactive portfolio disguised as a tiny OS, complete with dialogue system, particle transitions, and a retro file-explorer UI.",
+        blurb: "An interactive portfolio disguised as a tiny OS, complete with dialogue system and a retro file-explorer UI.",
         stack: ["React", "Vite", "CSS"],
+        isLocked: false,
         isCorrupted: false,
         isFolder: false,
     },
@@ -61,9 +64,10 @@ export const PROJECTS = [
         name: "Prototypes",
         icon: "📂",
         children: PROTOTYPES,
-        isCorrupted: false,
         isFolder: true,
-        
+        isLocked: false,
+        isCorrupted: false,
+        isPrototypeContainer: true,
     },
 ];
 

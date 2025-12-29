@@ -3,7 +3,7 @@ import "../styles/FileExplorer.css";
 
 /*
     Displays details for a single prototype inside the File Explorer.
-    Pure presentational component — receives all data via props.
+    Pure presentational component - receives all data via props.
 
     Supports:
         - title
@@ -17,7 +17,7 @@ import "../styles/FileExplorer.css";
 export default function PrototypeInfo({ prototype }) {
     if (!prototype) return null;
 
-    const isLocked = prototype.status === "locked";
+    const isLocked = prototype.isLocked === true;
     const hasLiveLink = Boolean(prototype.links?.live);
     const hasRepoLink = Boolean(prototype.links?.repo);
 
@@ -29,7 +29,7 @@ export default function PrototypeInfo({ prototype }) {
     return (
         <div className="file-info">
             {prototype.blurb && (
-                <p className="file-blurb"><h3>{prototype.blurb}</h3></p>
+                <div className="file-blurb"><h3>{prototype.blurb}</h3></div>
             )}
 
             {prototype.stack?.length > 0 && (

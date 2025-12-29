@@ -3,15 +3,14 @@ import { useEffect, useRef } from "react";
 import "../../styles/CorruptedPrototypeView.css";
 
 /*
-    MiniGraph
+    THREADMAP_Fracture
     ----------
     A tiny chaotic graph visualizer that rebuilds itself every
     time the user clicks the canvas.
 
     Implementation notes:
         • Using a custom DOM event ("build") instead of React state
-        to trigger redraws. This is intentionally cursed, consistent
-        with the "broken lab prototype" aesthetic.
+        to trigger redraws.
         • React mounts → effect attaches a listener → clicking canvas
         dispatches the "build" event → graph redraws.
 */
@@ -87,7 +86,7 @@ export default function MiniGraph({ onBack }) {
                 height={220}
                 className="cp-graph-canvas"
                 onClick={() => {
-                    // cursed redraw trigger
+                    // redraw trigger
                     const evt = new Event("build");
                     canvasRef.current.dispatchEvent(evt);
                 }}

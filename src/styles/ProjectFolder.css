@@ -5,7 +5,6 @@
 
 .folder-tile {
     width: 110px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,4 +56,84 @@
 
     /* Allow long names to wrap instead of blowing layout */
     word-break: break-word;
+}
+
+/* ============================================
+    Corrupted Folder (icon + label)
+    Used in the Prototypes grid
+   ============================================ */
+
+.folder-tile.is-corrupted {
+    align-self: flex-start;
+    --corrupt-x: 90px;
+    --corrupt-y: 20px;
+    --corrupt-rot: -2deg;
+
+    transform: translate(var(--corrupt-x), var(--corrupt-y)) rotate(var(--corrupt-rot));
+
+    transition: background 0.12s ease, box-shadow 0.12s ease;
+}
+
+.folder-tile.is-corrupted:hover {
+    animation: corrupted-shiver 0.35s steps(2, end);
+}
+
+@keyframes corrupted-shiver {
+    0% {
+        transform: translate(var(--corrupt-x), var(--corrupt-y)) rotate(var(--corrupt-rot));
+    }
+
+    25% {
+        transform: translate(calc(var(--corrupt-x) - 1px), calc(var(--corrupt-y) + 1px)) rotate(calc(var(--corrupt-rot) + 0.5deg));
+    }
+
+    50% {
+        transform: translate(calc(var(--corrupt-x) + 1px), calc(var(--corrupt-y) - 1px)) rotate(calc(var(--corrupt-rot) - 0.5deg));
+    }
+
+    100% {
+        transform: translate(var(--corrupt-x), var(--corrupt-y)) rotate(var(--corrupt-rot));
+    }
+}
+
+.folder-tile.is-corrupted:hover .folder-icon {
+    animation: icon-glitch 0.4s steps(1, end);
+    animation-delay: 120ms;
+}
+
+@keyframes icon-glitch {
+    0% {
+        filter: none;
+    }
+
+    90% {
+        filter: none;
+    }
+
+    92% {
+        filter: hue-rotate(20deg) contrast(1.2);
+    }
+
+    100% {
+        filter: none;
+    }
+}
+
+.folder-tile.is-corrupted .folder-label {
+    color: rgba(150, 190, 210, 0.75);
+    transition: color 0.15s ease;
+}
+
+.folder-tile.is-corrupted:hover .folder-label {
+    color: #cfa5b5;
+    transition-delay: 60ms;
+}
+
+
+@media (max-width: 430px) {
+    .folder-tile.is-corrupted {
+        --corrupt-x: 40px;
+        --corrupt-y: 25px;
+        --corrupt-rot: -1deg;
+    }
 }

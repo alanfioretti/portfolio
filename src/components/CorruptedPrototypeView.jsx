@@ -11,13 +11,13 @@ import "../styles/FileExplorer.css";
     Corrupted prototype intro window.
     Implements a 5-phase sequence:
 
-        1. glitch      – scrambled text reveal
-        2. title       – static corrupted title
-        3. lore        – autoplaying lore subtitles
-        4. links       – list of corrupted buttons w/ random glitching
-        5. repairing   – Win95-style repair bar before returning to main UI
+        1. glitch      - scrambled text reveal
+        2. title       - static corrupted title
+        3. lore        - autoplaying lore subtitles
+        4. links       - list of corrupted buttons w/ random glitching
+        5. repairing   - Win95-style repair bar before returning to main UI
 
-    The parent registers a repair callback via `registerRepair`.
+    The parent registers a repair callback via 'registerRepair'.
 */
 
 const TITLE_TEXT = "CORRUPTED :: SYSTEM BREACH";
@@ -26,7 +26,7 @@ const loreLines = [
     "Initializing corrupted file header…",
     "Crosslinking orphaned memory sectors…",
     "ACCESS GRANTED TO: P0RTF0LIO//C0RRUPTED",
-    "CORRUPTION LEVEL: 87% — STABLE(ISH)",
+    "CORRUPTION LEVEL: 87% - STABLE(ISH)",
 ];
 
 export default function CorruptedPrototypeView({
@@ -58,7 +58,7 @@ export default function CorruptedPrototypeView({
         {
             label: "scry_docs//converter_v2.log",
             section: "cursed_converter",
-            description: "CORRUPTED: iCloud Note Migrator → Obsidian Engine — stable-ish"
+            description: "CORRUPTED: iCloud Note Migrator → Obsidian Engine - stable-ish"
         }
     ];
 
@@ -161,7 +161,7 @@ export default function CorruptedPrototypeView({
             setTimeout(() => {
                 target.classList.remove("cp-jitter");
 
-                // schedule next glitch (2–7s)
+                // schedule next glitch (2-7s)
                 const delay = 2000 + Math.random() * 5000;
                 nextGlitchTimeout = setTimeout(triggerGlitch, delay);
             }, 250);
@@ -192,24 +192,24 @@ export default function CorruptedPrototypeView({
         <div className="corrupted-prototype-window">
             <div className={`corrupted-prototype ${phase}`}>
 
-                {/* 1 — glitch animation */}
+                {/* 1 - glitch animation */}
                 {phase === "glitch" && (
                     <pre className="cp-glitch-text">{glitchText}</pre>
                 )}
 
-                {/* 2 — static corrupted title */}
+                {/* 2 - static corrupted title */}
                 {phase === "title" && (
                     <pre className="cp-title-text">{TITLE_TEXT}</pre>
                 )}
 
-                {/* 3 — lore display */}
+                {/* 3 - lore display */}
                 {phase === "lore" && (
                     <pre className="cp-lore-text">
                         {loreLines[loreIndex]}
                     </pre>
                 )}
 
-{/* 4 — Corrupted index and corrupted detail views */}
+{/* 4 - Corrupted index and corrupted detail views */}
 {phase === "links" && (
     <div className="cp-links">
 
@@ -262,7 +262,7 @@ export default function CorruptedPrototypeView({
     </div>
 )}
 
-                {/* 5 — Win95-style repair */}
+                {/* 5 - Win95-style repair */}
                 {phase === "repairing" && (
                     <div className="cp-repairing">
                         <div className="cp-repair-title">Scanning system integrity…</div>

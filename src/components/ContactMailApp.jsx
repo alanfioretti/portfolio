@@ -1,5 +1,5 @@
 // src/components/ContactMailApp.jsx
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "../styles/ContactMailApp.css";
 
 const WEB3FORMS_URL = "https://api.web3forms.com/submit";
@@ -13,10 +13,12 @@ const ContactMailApp = () => {
     company: "",
     subject: "",
     message: "",
-    botcheck: ""   // <-- honeypot (Web3Forms-compatible)
+    botcheck: ""
   });
 
   const [status, setStatus] = useState({ state: "idle", note: "" });
+
+  const startedAt = useRef(Date.now());
 
   const onChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,9 +26,18 @@ const ContactMailApp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // If botcheck contains anything: drop silently.
+    // If botcheck contains anything: drop silently
     if (form.botcheck) return;
 
+    // Human-time gating
+    if (Date.now() - startedAt.current < 1200) return;
+
+    // Email sanity check
+    if (!form.email.includes("@") || form.email.length > 120) {
+      setStatus({ state: "error", note: "Invalid email address." });
+      return;
+    }
+    //Human confidence high
     setStatus({
       state: "sending",
       note: "Transmitting via grackle relay…"
@@ -35,7 +46,7 @@ const ContactMailApp = () => {
     try {
       // Build the payload that Web3Forms expects
       const payload = {
-        access_key: "df1704b2-d9d9-4df7-8f2f-084f33553b8f", // <-- paste it here
+        access_key: "df1704b2-d9d9-4df7-8f2f-084f33553b8f",
         name: form.name,
         email: form.email,
         company: form.company,
@@ -59,7 +70,7 @@ const ContactMailApp = () => {
         throw new Error(data.message || "Send failed");
       }
 
-      // Success 🎉
+      // Success
       setStatus({
         state: "sent",
         note: "Thanks for reaching out! I’ll get back to you soon."
@@ -90,7 +101,7 @@ const ContactMailApp = () => {
 
       <form className="mail-form" onSubmit={handleSubmit} autoComplete="off">
 
-        {/* Honeypot (hidden from humans, bots will autofill) */}
+        {/* Honeypot */}
         <input
           type="text"
           name="botcheck"
@@ -101,12 +112,13 @@ const ContactMailApp = () => {
           autoComplete="off"
         />
 
-        <div className="row">
-          <label>From *</label>
+        <div className="row required">
+          <label>From</label>
           <input
             required
             name="name"
             placeholder="Your name"
+            maxLength={60}
             value={form.name}
             onChange={onChange}
           />
@@ -117,13 +129,14 @@ const ContactMailApp = () => {
           <input
             name="company"
             placeholder="Your company"
+            maxLength={80}
             value={form.company}
             onChange={onChange}
           />
         </div>
 
-        <div className="row">
-          <label>Email *</label>
+        <div className="row required">
+          <label>Email</label>
           <input
             required
             name="email"
@@ -134,24 +147,26 @@ const ContactMailApp = () => {
           />
         </div>
 
-        <div className="row">
-          <label>Subject *</label>
+        <div className="row required">
+          <label>Subject</label>
           <input
             required
             name="subject"
             placeholder="Let’s build something"
+            maxLength={120}
             value={form.subject}
             onChange={onChange}
           />
         </div>
 
-        <div className="row">
-          <label>Message *</label>
+        <div className="row required">
+          <label>Message</label>
           <textarea
             required
             name="message"
             rows={6}
             placeholder="Tell me about the project…"
+            maxLength={3000}
             value={form.message}
             onChange={onChange}
           />

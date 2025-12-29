@@ -3,7 +3,7 @@ import "../styles/FileExplorer.css";
 
 /*
     Displays details for a single project inside the File Explorer.
-    Pure presentational component — receives all data via props.
+    Pure presentational component - receives all data via props.
 
     Supports:
         - title
@@ -16,7 +16,7 @@ import "../styles/FileExplorer.css";
 export default function ProjectInfo({ project }) {
     if (!project) return null;
 
-    const isLocked = project.status === "locked";
+    const isLocked = project.isLocked === true;
     const hasLiveLink = Boolean(project.links?.live);
     const hasRepoLink = Boolean(project.links?.repo);
 
@@ -28,7 +28,7 @@ export default function ProjectInfo({ project }) {
     return (
         <div className="file-info">
             {project.blurb && (
-                <p className="file-blurb"><h3>{project.blurb}</h3></p>
+                <div className="file-blurb"><h3>{project.blurb}</h3></div>
             )}
 
             {project.stack?.length > 0 && (
@@ -43,7 +43,7 @@ export default function ProjectInfo({ project }) {
             )}
 
             {/* Locked / redacted preview */}
-            {isLocked && visuals.length > 0 && visuals[0]?.redacted && (
+{isLocked && visuals.length > 0 && visuals[0]?.redacted && (
                 <div
                     className="preview-redacted"
                     title="Access restricted"
@@ -73,7 +73,6 @@ export default function ProjectInfo({ project }) {
             ) : (
                 (hasLiveLink || hasRepoLink) && (
                     <div className="links">
-
                         {hasLiveLink && (
                             <a
                                 href={project.links.live}
@@ -95,12 +94,9 @@ export default function ProjectInfo({ project }) {
                                 💻 Inspect Source
                             </a>
                         )}
-
                     </div>
                 )
             )}
-
-
         </div>
-    )
+    );
 }

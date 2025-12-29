@@ -11,17 +11,17 @@ export default function PrototypeFolder({
     onOpen,
     icon = "📁",
     title = name,
-    isLocked = false
+    isCorrupted
 }) {
     return (
         <button
             type="button"
-            className={`folder-tile ${isLocked ? "folder-locked" : ""}`}
+            className={`folder-tile ${isCorrupted ? "is-corrupted" : ""}`}
             onClick={onOpen}
             aria-label={`Open prototype ${title}`}
             title={title}
         >
-            <div className="folder-icon">{icon}</div>
+            <div className="folder-icon" alt="">{icon}</div>
             <div className="folder-label">{name}</div>
         </button>
     );

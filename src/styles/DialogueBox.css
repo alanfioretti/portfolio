@@ -16,11 +16,11 @@
     cursor: pointer;
     z-index: 2;
 
-    /* Smooth fade-in just feels nicer */
+    /* Smooth fade-in */
     animation: dialogue-pop 0.25s ease-out;
 }
 
-/* Speaker variants (can add more later) */
+/* Speaker variants */
 .dialogue-box.grackle {
     left: 60%;
     /* shifts the grackle's bubble to the right */

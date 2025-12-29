@@ -1,5 +1,5 @@
 // src/components/FileExplorer.jsx
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import ProjectFolder from "./ProjectFolder";
 import ProjectInfo from "./ProjectInfo";
 import PrototypeFolder from "./PrototypeFolder";
@@ -9,6 +9,7 @@ import ContactMailApp from "./ContactMailApp";
 import CorruptedPrototypeView from "./CorruptedPrototypeView";
 import { PROJECTS, findProject } from "../data/projects";
 import { PROTOTYPES, findPrototype } from "../data/prototypes";
+import ScrollablePane from "./ScrollablePane";
 import "../styles/FileExplorer.css";
 
 /*
@@ -19,7 +20,7 @@ import "../styles/FileExplorer.css";
         - prototype selection inside Projects > Prototypes
         - corrupted prototype flow and repair sequence
 
-    UI mode is defined by `activeSection`, `activeProject` and `activePrototype`.
+    UI mode is defined by 'activeSection', 'activeProject' and 'activePrototype'.
 */
 
 const SECTION_TITLES = {
@@ -87,9 +88,10 @@ export default function FileExplorer() {
         if (!project) return;
 
         setActiveProject(project);
+        setActivePrototype(null);
 
-        if (project.slug === "prototypes") {
-            setParentProject(project);   // 👈 remember where we came from
+        if (project.isPrototypeContainer) {
+            setParentProject(project);   // remember where we came from
             setActiveSection("prototypes");
             setView("prototypes");
         } else {
@@ -118,7 +120,7 @@ export default function FileExplorer() {
                 break;
 
             case "prototypes":
-                setActiveProject(null); // 👈 restore project context
+                setActiveProject(null); // restore project context
                 setActiveSection("projects");
                 setView("projects");
                 break;
@@ -139,29 +141,75 @@ export default function FileExplorer() {
         }
     };
 
+    const [scrollHint, setScrollHint] = useState({
+        hasOverflow: false,
+        hasScrolled: false,
+    });
+
+    const [showHint, setShowHint] = useState(false);
+    const [fadeHint, setFadeHint] = useState(false);
+
+    const handleHintState = useCallback(
+        (state) => {
+            if (view === "root") return;
+            setScrollHint(state);
+        },
+        [view]
+    );
+
+    // Hard reset hint state on every view change to prevent "ghost hint"
+    useEffect(() => {
+
+        setScrollHint({ hasOverflow: false, hasScrolled: false });
+        setShowHint(false);
+        setFadeHint(false);
+    }, [view]);
+
+    useEffect(() => {
+        // Hint should be visible
+        if (scrollHint.hasOverflow && !scrollHint.hasScrolled) {
+            setShowHint(true);
+            setFadeHint(false);
+            return;
+        }
+
+        // Hint should fade out
+        if (showHint) {
+            setFadeHint(true);
+
+            const t = setTimeout(() => {
+                setShowHint(false);
+            }, 600);
+
+            return () => clearTimeout(t);
+        }
+    }, [scrollHint.hasOverflow, scrollHint.hasScrolled, showHint]);
+
+
+
     return (
         <div
             className={`file-explorer ${activePrototype?.isCorrupted ? "corrupted-mode" : ""
                 } ${activeSection ? "expanded" : ""}`}
         >
-            <div className="explorer-inner">
 
-                {/* Window Title Bar */}
-                <div className="window-title">
-                    <span className="window-title-text">
-                        {icon} {title}
-                    </span>
+            {/* Window Title Bar */}
+            <div className="window-title">
+                <span className="window-title-text">
+                    {icon} {title}
+                </span>
 
-                    {activeSection && (
-                        <button
-                            className="back-btn"
-                            type="button"
-                            onClick={handleBack}
-                        >
-                            {activePrototype?.isCorrupted ? "🔧 Scan & Fix" : "← Back"}
-                        </button>
-                    )}
-                </div>
+                {activeSection && (
+                    <button
+                        className="back-btn"
+                        type="button"
+                        onClick={handleBack}
+                    >
+                        {activePrototype?.isCorrupted ? "🔧 Scan & Fix" : "← Back"}
+                    </button>
+                )}
+            </div>
+            <ScrollablePane resetKey={view} onHintState={handleHintState}>
 
                 {/* ROOT DIRECTORY */}
                 {view === "root" && (
@@ -219,7 +267,8 @@ export default function FileExplorer() {
                                 key={p.slug}
                                 name={p.name}
                                 icon={p.icon}
-                                isLocked={p.status === "locked"}
+                                isLocked={p.isLocked}
+                                isCorrupted={p.isCorrupted}
                                 onOpen={() => openProject(p.slug)}
                             />
                         ))}
@@ -246,7 +295,8 @@ export default function FileExplorer() {
                                 key={p.slug}
                                 name={p.name}
                                 icon={p.icon}
-                                isLocked={p.status === "locked"}
+                                isLocked={p.isLocked}
+                                isCorrupted={p.isCorrupted}
                                 onOpen={() => openPrototype(p.slug)}
                             />
                         ))}
@@ -273,7 +323,17 @@ export default function FileExplorer() {
 
                 {/* CONTACT */}
                 {activeSection === "contact" && <ContactMailApp />}
-            </div>
+
+            </ScrollablePane>
+
+            {showHint && (
+                <div className={`scroll-hint-overlay ${fadeHint ? "fade-out" : ""}`}>
+                    <div className="scroll-gutter-hint">
+                        ▼ scroll for more
+                    </div>
+                </div>
+            )}
         </div>
+
     );
 }

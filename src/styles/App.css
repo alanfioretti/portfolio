@@ -18,7 +18,7 @@
     DOCUMENT RESET + GLOBAL RULES
   ------------------------------------------------------------
     Keep the real <body> from scrolling, bouncing, or shifting on
-    mobile. No fixed positioning here — that breaks Safari.
+    mobile. No fixed positioning here - that breaks Safari.
    ============================================================ */
 html,
 body {
@@ -45,16 +45,13 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     pointer-events: none;
-    /* purely visual */
     z-index: -1;
-    /* behind all UI layers */
 }
 
 /* ============================================================
     RESPONSIVE BACKGROUNDS
   ------------------------------------------------------------
     Swap out background images based on device width/orientation.
-    No JS needed — pure CSS keeps this lightweight and reliable.
    ============================================================ */
 
 /* iPhone & small devices */
