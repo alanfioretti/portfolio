@@ -9,6 +9,7 @@ import ContactMailApp from "./ContactMailApp";
 import CorruptedPrototypeView from "./CorruptedPrototypeView";
 import { PROJECTS, findProject } from "../data/projects";
 import { PROTOTYPES, findPrototype } from "../data/prototypes";
+import DOCK from "../data/dock";
 import ScrollablePane from "./ScrollablePane";
 import "../styles/FileExplorer.css";
 
@@ -49,6 +50,7 @@ export default function FileExplorer() {
     const [activePrototype, setActivePrototype] = useState(null);
     const [parentProject, setParentProject] = useState(null);
     const [resumeOpen, setResumeOpen] = useState(false);
+    const [isMinimized, setIsMinimized] = useState(false);
 
     const [view, setView] = useState("root");
     // "root" | "projects" | "project" | "prototypes" | "prototype" | "about" | "contact"
@@ -185,7 +187,22 @@ export default function FileExplorer() {
         }
     }, [scrollHint.hasOverflow, scrollHint.hasScrolled, showHint]);
 
+    // Restore minimized file explorer
+    const fileExplorerDockItem = DOCK.find(
+        (item) => item.id === "file-explorer"
+    );
 
+    if (isMinimized && fileExplorerDockItem) {
+        return (
+            <button
+                className="taskbar-icon"
+                onClick={() => setIsMinimized(false)}
+                aria-label="Restore File Explorer"
+            >
+                {fileExplorerDockItem.icon} {fileExplorerDockItem.label}
+            </button>
+        );
+    }
 
     return (
         <div
@@ -208,6 +225,17 @@ export default function FileExplorer() {
                         {activePrototype?.isCorrupted ? "🔧 Scan & Fix" : "← Back"}
                     </button>
                 )}
+
+                {view === "root" && (
+                    <button
+                        className="minimize-btn"
+                        onClick={() => setIsMinimized(true)}
+                        aria-label="Minimize window"
+                    >
+                        ▬
+                    </button>
+                )}
+
             </div>
             <ScrollablePane resetKey={view} onHintState={handleHintState}>
 

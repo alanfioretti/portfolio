@@ -3,7 +3,7 @@
    ============================================ */
 
 .file-explorer {
-    position: relative;
+    position: fixed;
     overflow: hidden;
     top: 50%;
     left: 50%;
@@ -66,6 +66,25 @@
 
     padding: 0.25rem 0.5rem;
     cursor: pointer;
+}
+
+/* Minimize Button */
+.file-explorer.minimized {
+    opacity: 0;
+    transform: scale(0.96);
+    pointer-events: none;
+}
+
+.taskbar-icon {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.taskbar-icon:hover {
+    opacity: 1;
 }
 
 

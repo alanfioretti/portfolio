@@ -3,7 +3,7 @@
    =============================== */
 
 .dialogue-box {
-    position: absolute;
+    position: fixed;
     bottom: 10%;
     left: 10%;
     max-width: 400px;
